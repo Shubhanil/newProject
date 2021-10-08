@@ -20,10 +20,10 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::get('/admin/home', [App\Http\Controllers\HomeController::class, 'index'])->name('admin.home')->middleware('is_admin');
+Route::get('/admin/home', [App\Http\Controllers\HomeController::class, 'adminIndex'])->name('admin.home')->middleware('is_admin');
 
 //Category
-Route::prefix('category')->group(function () {
+Route::prefix('category')->middleware('is_admin')->group(function () {
     Route::get('/listCategory', [App\Http\Controllers\BackendController::class, 'listCategory'])->name('listCategory');
     Route::get('/createCategory', [App\Http\Controllers\BackendController::class, 'createCategory'])->name('createCategory');
     Route::post('/addCategory', [App\Http\Controllers\BackendController::class, 'addCategory'])->name('addCategory');
@@ -33,7 +33,7 @@ Route::prefix('category')->group(function () {
 });
 
 //Product
-Route::prefix('product')->group(function () {
+Route::prefix('product')->middleware('is_admin')->group(function () {
     Route::get('/listProduct', [App\Http\Controllers\BackendController::class, 'listProduct'])->name('listProduct');
     Route::get('/createProduct', [App\Http\Controllers\BackendController::class, 'createProduct'])->name('createProduct');
     Route::post('/addProduct', [App\Http\Controllers\BackendController::class, 'addProduct'])->name('addProduct');

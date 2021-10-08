@@ -26,7 +26,7 @@
         @include('admin.component.header')
 
         <main class="py-4">
-            @yield('content')
+            @yield('admin_content')
         </main>
     </div>
 </body>
